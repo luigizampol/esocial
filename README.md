@@ -1,6 +1,3 @@
-# esocial
- updating employee data from an Excel spreadsheet
-
 Este projeto apresenta um código Python desenvolvido para automatizar o processo de consulta e atualização dos dados de funcionários de uma empresa a partir de uma planilha de Excel. O código utiliza a biblioteca Selenium para interagir com páginas da web e coletar informações relevantes, visando simplificar e agilizar a atualização de registros no sistema eSocial.
 
 O que é o eSocial?
