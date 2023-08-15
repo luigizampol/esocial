@@ -131,7 +131,6 @@ for url in lista_urls:
     driver.get(url)
     ativo = driver.find_elements(By.CSS_SELECTOR, 'td.center[data-col="Situação"]')
     infos['situacao'].append(ativo[0].text)
-
     dados_botao = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a.item-menu-interno.dados-contratuais')))
     dados_botao.click()
     extrair_dados_valor('contrato', 'idContrato')
