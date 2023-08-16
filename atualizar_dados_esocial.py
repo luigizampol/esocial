@@ -9,6 +9,7 @@ import pandas as pd
 from IPython.display import display
 import os
 from datetime import datetime
+from selenium.common.exceptions import NoSuchElementException
 
 # Definir as opções do Microsoft Edge
 # Define Microsoft Edge options
@@ -115,17 +116,16 @@ infos = {'contrato': [],
 # Define uma função para extrair dados com valor de um elemento pelo caminho XPATH
 # Define a function to extract data with value from an element by XPATH
 def extract_data(dado, id):
-    infos[dado].append(driver.find_element(By.XPATH, f"//input[@id='{id}']").get_attribute("value"))
-
-# Define uma função para extrair dados com a opção selecionada de um elemento de menu suspenso
-# Define a function to extract data with selected option from a dropdown element
-def extract_data_from_dropdown_menu(dado, id):
-    elemento = driver.find_elements(By.CSS_SELECTOR, f"#{id} option[selected='selected']")
-    if len(elemento) > 0:
-        valor = elemento[0].text
-        infos[dado].append((driver.find_element(By.ID, f"{id}").find_element(By.CSS_SELECTOR, "option[selected='selected']")).text)
-    else:
-        infos[dado].append(None)
+    try:
+        elemento = driver.find_element(By.XPATH, f"//input[@id='{id}']")
+        infos[dado].append(elemento.get_attribute("value"))
+    except NoSuchElementException:
+        elemento = driver.find_elements(By.CSS_SELECTOR, f"#{id} option[selected='selected']")
+        if len(elemento) > 0:
+            valor = elemento[0].text
+            infos[dado].append((driver.find_element(By.ID, f"{id}").find_element(By.CSS_SELECTOR, "option[selected='selected']")).text)
+        else:
+            infos[dado].append(None)
 
 contador = 0
 
@@ -153,27 +153,27 @@ for url in url_list:
     extract_data('nome', 'nomeTrabalhador')
     extract_data('tipo_registro', 'TipoRegistroAdmissao')
     extract_data('matricula', 'InfoVinculo_Matricula')
-    extract_data_from_dropdown_menu('regime_trab', 'InfoVinculo_TipoRegimeTrabalhista')
-    extract_data_from_dropdown_menu('categoria', 'InfoVinculo_InfoContrato_CodigoCategoria')
-    extract_data_from_dropdown_menu('regime_prev', 'InfoVinculo_TipoRegimePrevidenciario')
+    extract_data('regime_trab', 'InfoVinculo_TipoRegimeTrabalhista')
+    extract_data('categoria', 'InfoVinculo_InfoContrato_CodigoCategoria')
+    extract_data('regime_prev', 'InfoVinculo_TipoRegimePrevidenciario')
     extract_data('nome_cargo', 'InfoVinculo_InfoContrato_NomeCargo')
-    extract_data_from_dropdown_menu('cbo_cargo', 'InfoVinculo_InfoContrato_CBOCargo')
+    extract_data('cbo_cargo', 'InfoVinculo_InfoContrato_CBOCargo')
     extract_data('nome_funcao', 'InfoVinculo_InfoContrato_NomeFuncao')
-    extract_data_from_dropdown_menu('cbo_funcao', 'InfoVinculo_InfoContrato_CBOFuncao')
-    extract_data_from_dropdown_menu('un_pagamento', 'InfoVinculo_InfoContrato_Remuneracao_UnidadeSalarioFixo')
+    extract_data('cbo_funcao', 'InfoVinculo_InfoContrato_CBOFuncao')
+    extract_data('un_pagamento', 'InfoVinculo_InfoContrato_Remuneracao_UnidadeSalarioFixo')
     extract_data('salario_base', 'InfoVinculo_InfoContrato_Remuneracao_ValorSalarioFixo')
     extract_data('desc_salario_variavel', 'InfoVinculo_InfoContrato_Remuneracao_DescricaoSalarioVariavel')
-    extract_data_from_dropdown_menu('tipo_contrato_trabalho', 'InfoVinculo_InfoContrato_Duracao_TipoContrato')
+    extract_data('tipo_contrato_trabalho', 'InfoVinculo_InfoContrato_Duracao_TipoContrato')
     extract_data('horas_semanais', 'InfoVinculo_InfoContrato_HorarioContratual_QuantidadeHorasSemanal')
-    extract_data_from_dropdown_menu('tipo_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_TipoJornada')
-    extract_data_from_dropdown_menu('tempo_parcial', 'InfoVinculo_InfoContrato_HorarioContratual_JornadaTempoParcial')
+    extract_data('tipo_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_TipoJornada')
+    extract_data('tempo_parcial', 'InfoVinculo_InfoContrato_HorarioContratual_JornadaTempoParcial')
     extract_data('desc_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_DescricaoJornada')
     extract_data('data_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataAdmissao')
-    extract_data_from_dropdown_menu('tipo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoAdmissao')
-    extract_data_from_dropdown_menu('indicativo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_IndicativoAdmissao')
-    extract_data_from_dropdown_menu('regime_jornada', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoRegimeJornada')
-    extract_data_from_dropdown_menu('natureza_atividade', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_NaturezaAtividade')
-    extract_data_from_dropdown_menu('mes_database', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataBase')
+    extract_data('tipo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoAdmissao')
+    extract_data('indicativo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_IndicativoAdmissao')
+    extract_data('regime_jornada', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoRegimeJornada')
+    extract_data('natureza_atividade', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_NaturezaAtividade')
+    extract_data('mes_database', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataBase')
     extract_data('cnpj_sindicato', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_CnpjSindicatoCategoriaProfissional')
     # Contador para acompanhar o progresso do script
     # Counter to track the progress of the script
