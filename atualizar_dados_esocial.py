@@ -148,33 +148,38 @@ for url in url_list:
 
     # Funções que extraem os dados
     # Functions that extract the data
-    extract_data('contrato', 'idContrato')
-    extract_data('cpf', 'cpfTrabalhador')
-    extract_data('nome', 'nomeTrabalhador')
-    extract_data('tipo_registro', 'TipoRegistroAdmissao')
-    extract_data('matricula', 'InfoVinculo_Matricula')
-    extract_data('regime_trab', 'InfoVinculo_TipoRegimeTrabalhista')
-    extract_data('categoria', 'InfoVinculo_InfoContrato_CodigoCategoria')
-    extract_data('regime_prev', 'InfoVinculo_TipoRegimePrevidenciario')
-    extract_data('nome_cargo', 'InfoVinculo_InfoContrato_NomeCargo')
-    extract_data('cbo_cargo', 'InfoVinculo_InfoContrato_CBOCargo')
-    extract_data('nome_funcao', 'InfoVinculo_InfoContrato_NomeFuncao')
-    extract_data('cbo_funcao', 'InfoVinculo_InfoContrato_CBOFuncao')
-    extract_data('un_pagamento', 'InfoVinculo_InfoContrato_Remuneracao_UnidadeSalarioFixo')
-    extract_data('salario_base', 'InfoVinculo_InfoContrato_Remuneracao_ValorSalarioFixo')
-    extract_data('desc_salario_variavel', 'InfoVinculo_InfoContrato_Remuneracao_DescricaoSalarioVariavel')
-    extract_data('tipo_contrato_trabalho', 'InfoVinculo_InfoContrato_Duracao_TipoContrato')
-    extract_data('horas_semanais', 'InfoVinculo_InfoContrato_HorarioContratual_QuantidadeHorasSemanal')
-    extract_data('tipo_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_TipoJornada')
-    extract_data('tempo_parcial', 'InfoVinculo_InfoContrato_HorarioContratual_JornadaTempoParcial')
-    extract_data('desc_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_DescricaoJornada')
-    extract_data('data_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataAdmissao')
-    extract_data('tipo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoAdmissao')
-    extract_data('indicativo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_IndicativoAdmissao')
-    extract_data('regime_jornada', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoRegimeJornada')
-    extract_data('natureza_atividade', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_NaturezaAtividade')
-    extract_data('mes_database', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataBase')
-    extract_data('cnpj_sindicato', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_CnpjSindicatoCategoriaProfissional')
+    data_to_extract = [
+    ('contrato', 'idContrato'),
+    ('cpf', 'cpfTrabalhador'),
+    ('nome', 'nomeTrabalhador'),
+    ('tipo_registro', 'TipoRegistroAdmissao'),
+    ('matricula', 'InfoVinculo_Matricula'),
+    ('regime_trab', 'InfoVinculo_TipoRegimeTrabalhista'),
+    ('categoria', 'InfoVinculo_InfoContrato_CodigoCategoria'),
+    ('regime_prev', 'InfoVinculo_TipoRegimePrevidenciario'),
+    ('nome_cargo', 'InfoVinculo_InfoContrato_NomeCargo'),
+    ('cbo_cargo', 'InfoVinculo_InfoContrato_CBOCargo'),
+    ('nome_funcao', 'InfoVinculo_InfoContrato_NomeFuncao'),
+    ('cbo_funcao', 'InfoVinculo_InfoContrato_CBOFuncao'),
+    ('un_pagamento', 'InfoVinculo_InfoContrato_Remuneracao_UnidadeSalarioFixo'),
+    ('salario_base', 'InfoVinculo_InfoContrato_Remuneracao_ValorSalarioFixo'),
+    ('desc_salario_variavel', 'InfoVinculo_InfoContrato_Remuneracao_DescricaoSalarioVariavel'),
+    ('tipo_contrato_trabalho', 'InfoVinculo_InfoContrato_Duracao_TipoContrato'),
+    ('horas_semanais', 'InfoVinculo_InfoContrato_HorarioContratual_QuantidadeHorasSemanal'),
+    ('tipo_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_TipoJornada'),
+    ('tempo_parcial', 'InfoVinculo_InfoContrato_HorarioContratual_JornadaTempoParcial'),
+    ('desc_jornada', 'InfoVinculo_InfoContrato_HorarioContratual_DescricaoJornada'),
+    ('data_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataAdmissao'),
+    ('tipo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoAdmissao'),
+    ('indicativo_adm', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_IndicativoAdmissao'),
+    ('regime_jornada', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_TipoRegimeJornada'),
+    ('natureza_atividade', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_NaturezaAtividade'),
+    ('mes_database', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataBase'),
+    ('cnpj_sindicato', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_CnpjSindicatoCategoriaProfissional')]
+
+    for dado, id in data_to_extract:
+        extract_data(dado, id)
+
     # Contador para acompanhar o progresso do script
     # Counter to track the progress of the script
     contador += 1
