@@ -113,8 +113,8 @@ infos = {'contrato': [],
               'cnpj_sindicato': [],
               }
 
-# Define uma função para extrair dados com valor de um elemento pelo caminho XPATH
-# Define a function to extract data with value from an element by XPATH
+# Define uma função para extrair dados com valor de um elemento
+# Define a function to extract data with value from an element
 def extract_data(dado, id):
     try:
         elemento = driver.find_element(By.XPATH, f"//input[@id='{id}']")
@@ -146,8 +146,8 @@ for url in url_list:
     dados_botao = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a.item-menu-interno.dados-contratuais')))
     dados_botao.click()
 
-    # Funções que extraem os dados
-    # Functions that extract the data
+    # Chaves e seus respectivos elementos
+    # Keys and their respective elements
     data_to_extract = [
     ('contrato', 'idContrato'),
     ('cpf', 'cpfTrabalhador'),
@@ -177,6 +177,9 @@ for url in url_list:
     ('mes_database', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_DataBase'),
     ('cnpj_sindicato', 'InfoVinculo_InformacoesRegimeTrabalhista_InformacoesTrabalhadorCeletista_CnpjSindicatoCategoriaProfissional')]
 
+
+    # Loop de função para extrair os dados
+    # Function loop to extract data
     for dado, id in data_to_extract:
         extract_data(dado, id)
 
